@@ -5,7 +5,7 @@ const createAxiosInstance = () => {
   const token = localStorage.getItem("token");
 
   return axios.create({
-    baseURL: "http://localhost:8080/api", // 기본 URL
+    baseURL: "https://port-0-severance-m4yzyreu8bbe535f.sel4.cloudtype.app/api", // 기본 URL
     headers: {
       Authorization: token ? `Bearer ${token}` : "",
       "Content-Type": "application/json", // 기본 헤더 설정
