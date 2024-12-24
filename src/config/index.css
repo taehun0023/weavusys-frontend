@@ -1,0 +1,206 @@
+/* 공통 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+h2,
+.title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.error,
+.success-message,
+.loading,
+.error-message {
+  text-align: center;
+  font-size: 16px;
+  color: #f44336;
+  margin-top: 50px;
+}
+
+.success-message {
+  color: #4caf50;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+.search-container {
+}
+/* 직원 등록 폼 */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.detail-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.employee-regi-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input,
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+input:focus,
+select:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+.submit-button,
+.save-button {
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.submit-button:disabled,
+.save-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.submit-button:hover:not(:disabled),
+.save-button:hover:not(:disabled) {
+  background-color: #ccc;
+}
+
+.action-button {
+  padding: 0.4rem 0.8rem;
+  background-color: #007bff;
+  margin: 20px 0;
+  width: 5rem;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+}
+
+/* 테이블 */
+.table,
+table {
+  margin: 20px 0;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td,
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* 버튼 컨테이너 */
+.button-container {
+  text-align: right;
+  margin-top: 20px;
+}
+
+/* 로딩 및 오류 메시지 */
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* 셀(CellLeft, CellRight) 스타일 */
+
+.detailsTable {
+  display: table;
+  width: 100%;
+  margin: 20px 0;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+.tablerow {
+  display: table-row;
+}
+.cell-right {
+  display: table-cell;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  text-align: left;
+  width: 70%;
+}
+
+.cell-left {
+  display: table-cell;
+  padding: 0.8rem 1rem;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  text-align: left;
+  width: 30%;
+}
