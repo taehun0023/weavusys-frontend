@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../config/AuthContext"; // AuthContext에서 useAuth 훅 가져오기
-import axios from "axios";
 import "../config/index.css";
+import createAxiosInstance from "../config/api";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -17,7 +17,8 @@ function LoginPage() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/login", {
+      const axiosInstance = createAxiosInstance(); // 인스턴스 생성
+      const response = await axiosInstance.post("/login", {
         username,
         password,
       });

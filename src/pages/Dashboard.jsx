@@ -78,7 +78,7 @@ function Dashboard() {
         <tbody>
           {userData.map((item) => (
             <tr key={item.id}>
-              <td className="table-data">
+              <td>
                 <button
                   className="action-button"
                   onClick={() => handleEmployeeClick(item.employee.id)}
@@ -86,7 +86,7 @@ function Dashboard() {
                   {item.employee.name}
                 </button>
               </td>
-              <td className="table-data">
+              <td>
                 {getEmployeeTypeText(
                   item.employee.employeeType,
                   item.employee.status
@@ -96,10 +96,10 @@ function Dashboard() {
               <td className="table-data">
                 {item.endDate ? item.endDate : "재직중"}
               </td>
-              <td className="table-data">
+              <td>
                 {formatAmount(item.totalAmount ? item.totalAmount : "0")}
               </td>
-              <td className="table-data">{getStateText(item.state)}</td>
+              <td>{getStateText(item.state)}</td>
             </tr>
           ))}
         </tbody>
