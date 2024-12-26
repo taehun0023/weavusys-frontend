@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/JSH95.github.io/static/css/main.1391b0bb.css",
+    "main.js": "/JSH95.github.io/static/js/main.8f780029.js",
+    "index.html": "/JSH95.github.io/index.html",
+    "main.1391b0bb.css.map": "/JSH95.github.io/static/css/main.1391b0bb.css.map",
+    "main.8f780029.js.map": "/JSH95.github.io/static/js/main.8f780029.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1391b0bb.css",
+    "static/js/main.8f780029.js"
+  ]
+}
