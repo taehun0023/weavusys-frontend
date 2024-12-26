@@ -73,8 +73,9 @@ function EmployeeDetail() {
     if (!confirmDelete) return;
 
     try {
-      const response = await axios.post(
-        `http://localhost:8080/api/employees/${id}`
+      const axiosInstance = createAxiosInstance(); // 인스턴스 생성
+      const response = await axiosInstance.post(
+          `/employees/${id}`
       );
       if (response.status === 200) {
         alert("직원이 성공적으로 삭제되었습니다.");

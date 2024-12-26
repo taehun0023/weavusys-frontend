@@ -1,4 +1,3 @@
-// src/utils/textUtils.js
 
 // 상태 코드에 따른 텍스트 반환
 export const getStateText = (state) => {
