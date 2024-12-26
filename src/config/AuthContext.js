@@ -8,13 +8,14 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null); // token 상태 추가
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     if (savedToken) {
       setIsLoggedIn(true);
       setToken(savedToken);
-    }
+    } setLoading(false);
   }, []);
 
   const login = (newToken) => {
@@ -29,9 +30,13 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token"); // 토큰 삭제
   };
 
+  if (loading) {
+    return <div>Loading...</div>; // 초기화 중 로딩 상태 표시
+  }
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, token, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+      <AuthContext.Provider value={{ isLoggedIn, token, login, logout }}>
+        {children}
+      </AuthContext.Provider>
   );
 };
