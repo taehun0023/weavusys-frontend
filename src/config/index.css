@@ -11,6 +11,7 @@ body {
 
 h2,
 .title {
+  /*display: flex;*/
   text-align: center;
   color: #333;
   margin-bottom: 20px;
@@ -35,8 +36,7 @@ h2,
   padding: 8px;
   box-sizing: border-box;
 }
-.search-container {
-}
+
 /* 직원 등록 폼 */
 .container {
   max-width: 800px;
@@ -48,6 +48,11 @@ h2,
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+}
 .detail-container {
   max-width: 600px;
   margin: 0 auto;
@@ -138,11 +143,16 @@ select:focus {
   }
 
 /* 테이블 */
-.table,
 table {
-  margin: 20px 0;
-  width: 100%;
+  width: 100%; /* 테이블의 너비를 콘텐츠에 맞게 자동 설정 */
+  margin: 20px auto; /* 테이블을 중앙 정렬 */
   border-collapse: collapse;
+  overflow-x: auto;
+}
+@media (max-width: 407px) {
+  .table {
+    display: block; /* 모바일 화면에서 스크롤 가능하도록 설정 */
+  }
 }
 
 .table th,

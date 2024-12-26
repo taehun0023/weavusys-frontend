@@ -43,7 +43,6 @@ function Dashboard() {
     <div className="container">
       <h1 className="title">WEAVUS 퇴직금 목록</h1>
       <h3 className="title">연도별 적립 총액</h3>
-      <div className="search-container">
         <label htmlFor="year" className="label">
           연도 선택:
         </label>
@@ -59,7 +58,6 @@ function Dashboard() {
         <button className="submit-button" onClick={handleSearchClick}>
           검색
         </button>
-      </div>
       <p className="total-amount">
         {selectedYear} 년의 적립 총액: {formatAmount(totalAccumulatedAmount)}
       </p>
