@@ -104,14 +104,15 @@ const Menu = styled.ul`
   margin: 0;
   align-items: center;
   flex-wrap: wrap; /* 메뉴 항목들이 화면 크기에 맞춰 자동으로 줄어듦 */
-  width: 80%; /* 메뉴의 너비를 100%로 설정 */
+  width: 70%; /* 메뉴의 너비를 100%로 설정 */
   justify-content: flex-end; /* 메뉴 항목을 오른쪽으로 정렬 */
 
   @media (max-width: 768px) {
     position: absolute;
-    top: 60px;
+    top: 40px;
     left: 0;
     right: 0;
+    width: 100%;
     background-color: #333;
     flex-direction: column;
     align-items: center;
