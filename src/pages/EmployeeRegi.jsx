@@ -11,7 +11,7 @@ const EmployeeRegi = () => {
     exitDate: "",
     employeeType: "",
     conversionDate: "",
-    rank: 0,
+    rank: "",
     status: 0,
   });
 
@@ -32,7 +32,7 @@ const EmployeeRegi = () => {
         exitDate: "",
         employeeType: "",
         conversionDate: "",
-        rank: 0,
+        rank: "",
         status: 0,
       });
     }
@@ -96,6 +96,7 @@ const EmployeeRegi = () => {
             value={formData.employeeType}
             onChange={handleChange}
             className="input"
+            required
           >
             <option value="" disabled>
               직원 유형을 선택해 주세요
@@ -112,6 +113,7 @@ const EmployeeRegi = () => {
               name="conversionDate"
               value={formData.conversionDate}
               onChange={handleChange}
+              required
               className="input"
             />
           </div>
@@ -122,8 +124,8 @@ const EmployeeRegi = () => {
             name="rank"
             value={formData.rank}
             onChange={handleChange}
-            required
             className="input"
+            required
           >
             <option value="" disabled>
               직급을 선택해 주세요

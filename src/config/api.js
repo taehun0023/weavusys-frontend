@@ -11,7 +11,7 @@ const createAxiosInstance = () => {
       Authorization: token ? `Bearer ${token}` : "",
       "Content-Type": "application/json", // 기본 헤더 설정
     },
-    timeout: 3600000, // 기본 타임아웃 설정 (10초)
+    timeout: 300000, // 기본 타임아웃 설정 (5분)
   });
 };
 

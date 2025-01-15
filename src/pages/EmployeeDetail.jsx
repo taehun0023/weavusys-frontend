@@ -44,8 +44,11 @@ function EmployeeDetail() {
     if (!confirmSave) {
       return;
     } else {
-      window.alert("직원 수정을 완료했습니다");
       try {
+        if (editedItem.rank === "" && editedItem.employeeType === "") {
+          alert("입력되지 않은 값이 있습니다. 다시 한번 확인해 주세요."); // 직급이 선택되지 않으면 경고 메시지 표시
+          return;
+        }
         const axiosInstance = createAxiosInstance(); // 인스턴스 생성
         const response = await axiosInstance.put(
           `/employees/${employeeId}`,
@@ -53,9 +56,15 @@ function EmployeeDetail() {
         );
         setItem(response.data);
         setIsEditing(false);
+        window.alert("직원 수정을 완료했습니다");
       } catch (err) {
-        setError("직원 정보를 저장하는 데 실패했습니다.");
-        console.error(err);
+        if (err.response && err.response.status === 404) {
+          // 404 에러에 대한 처리
+          window.alert("입력된 값을 다시 한번 확인해 주세요");
+        } else {
+          // 기타 에러에 대한 처리
+          setError("직원 정보를 저장하는 데 실패했습니다.");
+        }
       }
     }
   };
@@ -68,9 +77,17 @@ function EmployeeDetail() {
     navigate(-1);
   };
 
+  //직원 삭제 시 퇴직일 여부 판단하여 삭제 진행
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("직원을 삭제하시겠습니까?");
-    if (!confirmDelete) return;
+    if (editedItem.exitDate == null) {
+      const confirmDelete = window.confirm("퇴직일이 설정되 있지 않습니다. \n 퇴직일을 오늘 날짜로 설정 하시겠습니까?");
+      if (!confirmDelete) return;
+      editedItem.exitDate = new Date().toISOString().split("T")[0];
+      await handleSave(editedItem); // 퇴직일 저장 처리
+    }else {
+      const confirmDelete = window.confirm("직원을 삭제하시겠습니까?");
+      if (!confirmDelete) return;
+    }
 
     try {
       const axiosInstance = createAxiosInstance(); // 인스턴스 생성
@@ -150,22 +167,27 @@ function EmployeeDetail() {
                     name="employeeType"
                     value={editedItem.employeeType}
                     onChange={handleChange}
+                    className="input"
                     required
                   >
                     <option value="CONTRACT">계약직</option>
                     <option value="REGULAR">정규직</option>
                   </select>
                 </div>
-                <div style={styles.formGroup}>
-                  <label style={styles.label}>전환 날짜</label>
-                  <input
-                    type="date"
-                    style={styles.input}
-                    name="conversionDate"
-                    value={editedItem.conversionDate || ""}
-                    onChange={handleChange}
-                  />
-                </div>
+                {editedItem.employeeType === "REGULAR" && (
+                    <div style={styles.formGroup}>
+                      <label style={styles.label}>전환 날짜</label>
+                      <input
+                          type="date"
+                          style={styles.input}
+                          name="conversionDate"
+                          value={editedItem.conversionDate|| ""}
+                          onChange={handleChange}
+                          required
+                          className="input"
+                      />
+                    </div>
+                )}
                 <div style={styles.formGroup}>
                   <label style={styles.label}>직급</label>
                   <select

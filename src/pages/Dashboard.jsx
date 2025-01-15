@@ -32,36 +32,37 @@ function Dashboard() {
   // 유저 정보와 연도별 데이터가 로딩되거나 에러가 발생한 경우 처리
   if (userLoading) {
     // || loading
-    return <loading className="loading">Loading...</loading>;
+    return <div className="loading">Loading...</div>;
   }
 
   if (userError || loading) {
-    return <error className="error">{userError || error}</error>;
+    return <div className="error">{userError || error}</div>;
   }
 
   return (
     <div className="container">
       <h1 className="title">WEAVUS 퇴직금 목록</h1>
       <h3 className="title">연도별 적립 총액</h3>
+      <div className="year-container">
         <label htmlFor="year" className="label">
           연도 선택:
         </label>
         <input
-          id="year"
-          type="number"
-          value={selectedYear}
-          onChange={handleChangeYear}
-          min="2000"
-          max="2100"
-          className="input"
+            id="year"
+            type="number"
+            value={selectedYear}
+            onChange={handleChangeYear}
+            min="1111"
+            max="9999"
+            // className="input"
         />
         <button className="submit-button" onClick={handleSearchClick}>
           검색
         </button>
+      </div>
       <p className="total-amount">
         {selectedYear} 년의 적립 총액: {formatAmount(totalAccumulatedAmount)}
       </p>
-
       <table className="table">
         <thead>
           <tr>
@@ -76,7 +77,7 @@ function Dashboard() {
         <tbody>
           {userData.map((item) => (
             <tr key={item.id}>
-              <td>
+              <td className="table-data">
                 <button
                   className="action-button"
                   onClick={() => handleEmployeeClick(item.employee.id)}
@@ -84,20 +85,21 @@ function Dashboard() {
                   {item.employee.name}
                 </button>
               </td>
-              <td>
+              <td className="table-data">
                 {getEmployeeTypeText(
                   item.employee.employeeType,
-                  item.employee.status
+                  item.employee.status,
+                    item.employee.exitDate
                 )}
               </td>
               <td className="table-data">{item.employee.entryDate}</td>
               <td className="table-data">
-                {item.endDate ? item.endDate : "재직중"}
+                {item.employee.exitDate ? item.employee.exitDate : "재직중"}
               </td>
-              <td>
+              <td className="table-data">
                 {formatAmount(item.totalAmount ? item.totalAmount : "0")}
               </td>
-              <td>{getStateText(item.state)}</td>
+              <td className="table-data">{getStateText(item.state)}</td>
             </tr>
           ))}
         </tbody>

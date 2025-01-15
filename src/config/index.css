@@ -11,7 +11,6 @@ body {
 
 h2,
 .title {
-  /*display: flex;*/
   text-align: center;
   color: #333;
   margin-bottom: 20px;
@@ -40,27 +39,35 @@ h2,
 /* 직원 등록 폼 */
 .container {
   max-width: 800px;
+  min-width: 570px;
   margin: 0 auto;
   padding: 20px;
-  background: #f9f9f9;
+  background: #ffffff;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: center; /* 가로 중앙 정렬 */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
   .container {
     padding: 10px;
   }
 }
 .detail-container {
   max-width: 600px;
+  min-width: 300px;
+  min-height: 520px;
   margin: 0 auto;
-  padding: 2rem;
-  background: #f9f9f9;
+  padding: 20px;
+  background: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}@media (max-width: 769px) {
+  .detail-container {
+    padding: 10px;
+  }
 }
 
 .employee-regi-form {
@@ -76,6 +83,7 @@ h2,
 }
 
 label {
+  max-width: 50%;
   font-size: 14px;
   margin-bottom: 5px;
   color: #555;
@@ -83,10 +91,12 @@ label {
 
 input,
 select {
+  display: flex;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
+
 }
 
 input:focus,
@@ -107,8 +117,10 @@ select:focus {
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s ease;
-  margin: 20px 0;
+  margin: 10px 0;
   text-align: center;
+  float: right;
+  flex-shrink: 0;
 }
 
 .submit-button:disabled,
@@ -144,15 +156,11 @@ select:focus {
 
 /* 테이블 */
 table {
-  width: 100%; /* 테이블의 너비를 콘텐츠에 맞게 자동 설정 */
-  margin: 20px auto; /* 테이블을 중앙 정렬 */
+  width: auto;
+  min-width: 100%; /* 화면 너비를 넘지 않도록 제한 */
+  margin: 20px auto; /* 중앙 정렬 */
   border-collapse: collapse;
-  overflow-x: auto;
-}
-@media (max-width: 407px) {
-  .table {
-    display: block; /* 모바일 화면에서 스크롤 가능하도록 설정 */
-  }
+  overflow-x: auto; /* 스크롤 가능 */
 }
 
 .table th,
@@ -213,3 +221,23 @@ table th {
   text-align: left;
   width: 30%;
 }
+
+.total-amount {
+  width: 100%;
+  justify-content: center;
+  display: flex; /* 플렉스 박스 사용 */
+  align-items: center; /* 세로 정렬 (중앙 정렬) */
+
+}
+
+.year-container{
+  display: flex; /* 플렉스 박스 사용 */
+  align-items: center; /* 세로 정렬 (중앙 정렬) */
+  gap: 10px; /* 요소 간 간격 */
+  justify-content: center;
+  width: 100%;
+
+}
+
+
+

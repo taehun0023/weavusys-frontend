@@ -46,19 +46,19 @@ const EmployeeSettings = () => {
 
   return (
     <div className="detail-container">
-      <h1>WEAVUS 관리자 페이지</h1>
-      <table className="table">
+      <h1 className="title">WEAVUS 관리자 페이지</h1>
+        <table className="table">
         <thead>
           <tr>
-            <th>직급</th>
-            <th>현재 월 적립 금액</th>
+            <th className="table-header">직급</th>
+            <th className="table-header">현재 월 적립 금액</th>
           </tr>
         </thead>
         <tbody>
           {employees.map((employee, index) => (
             <tr key={index}>
-              <td>{getRankText(employee.rank)}</td>
-              <td>
+              <td className="table-data">{getRankText(employee.rank)}</td>
+              <td className="table-data">
                 <input
                   type="text"
                   className="input"
@@ -70,12 +70,10 @@ const EmployeeSettings = () => {
           ))}
         </tbody>
       </table>
-      <div className="button-container">
-        <button className="save-button" onClick={handleSave}>
-          적립금 {""}
-          업데이트
-        </button>
-      </div>
+      <button className="save-button" onClick={handleSave}>
+        적립금 {""}
+        업데이트
+      </button>
     </div>
   );
 };

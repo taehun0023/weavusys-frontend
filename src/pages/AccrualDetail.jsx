@@ -67,7 +67,7 @@ const EmployeeDetailPage = () => {
           </div>
           <div className="tablerow">
             <div className="cell-left">정직원 전환 일</div>
-            <div className="cell-right">{item.startDate}</div>
+            <div className="cell-right">{item.employee.conversionDate}</div>
           </div>
           <div className="tablerow">
             <div className="cell-left">예상 퇴직금</div>
@@ -78,7 +78,7 @@ const EmployeeDetailPage = () => {
           <div className="tablerow">
             <div className="cell-left">퇴사일</div>
             <div className="cell-right">
-              {item.endDate ? item.endDate : "재직중"}
+              {item.employee.exitDate ? item.employee.exitDate : "재직중"}
             </div>
           </div>
         </div>

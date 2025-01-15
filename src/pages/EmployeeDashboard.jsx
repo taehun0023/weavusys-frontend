@@ -64,8 +64,8 @@ function EmployeeDashboard() {
       <button className="submit-button" onClick={() => handleRowClick()}>
         직원 등록
       </button>
-      {loading && <loading className="loading">Loading...</loading>}
-      {error && <error className="error-message">{error}</error>}
+      {loading && <div className="loading">Loading...</div>}
+      {error && <div className="error-message">{error}</div>}
       {!loading && !error && (
         <table className="table">
           <thead>

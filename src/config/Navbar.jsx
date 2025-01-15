@@ -21,15 +21,19 @@ const Navbar = () => {
     navigate("/"); // 로그인 페이지로 이동
   };
 
+  const handleLogoClick = () => {
+    navigate("/dashboard");
+  }
+
   return (
     <>
       <Nav>
         <NavContainer>
-          <Logo>WEAVUS</Logo>
+          <Logo onClick={handleLogoClick}>WEAVUS</Logo>
           <MenuIcon onClick={toggleMenu}>
             {isMenuOpen ? "닫기" : "메뉴"}
           </MenuIcon>
-          <Menu isOpen={isMenuOpen}>
+          <Menu $isOpen={isMenuOpen}>
             {isLoggedIn ? (
               <>
                 <MenuItem>
@@ -92,7 +96,7 @@ const MenuIcon = styled.div`
   font-size: 18px;
   cursor: pointer;
   width: 50%;
-  @media (max-width: 768px) {
+  @media (max-width: 782px) {
     display: block;
   }
 `;
@@ -107,7 +111,7 @@ const Menu = styled.ul`
   width: 70%; /* 메뉴의 너비를 100%로 설정 */
   justify-content: flex-end; /* 메뉴 항목을 오른쪽으로 정렬 */
 
-  @media (max-width: 768px) {
+  @media (max-width: 782px) {
     position: absolute;
     top: 40px;
     left: 0;
@@ -116,7 +120,7 @@ const Menu = styled.ul`
     background-color: #333;
     flex-direction: column;
     align-items: center;
-    height: ${(props) => (props.isOpen ? "auto" : "0")};
+    height: ${(props) => (props.$isOpen ? "auto" : "0")};
     overflow: hidden;
     transition: height 0.3s ease-in-out;
   }

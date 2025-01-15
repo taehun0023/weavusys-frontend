@@ -10,9 +10,14 @@ export function EmployeeRegiApi() {
     setLoading(true);
     setError("");
     setResponseMessage(""); // 상태 초기화
+    if (employeeData.rank === "" && employeeData.employeeType === "") {
+      alert("입력되지 않은 값이 있습니다. 다시 한번 확인해 주세요."); // 직급이 선택되지 않으면 경고 메시지 표시
+      return;
+    }
 
     try {
       const axiosInstance = createAxiosInstance(); // 인스턴스 생성
+
       const response = await axiosInstance.post("/employees", employeeData);
       // 응답 데이터 설정
       setResponseMessage(response.data);

@@ -14,8 +14,8 @@ export const getStateText = (state) => {
 };
 
 // 직원 유형에 따른 텍스트 반환
-export const getEmployeeTypeText = (employeeType, status) => {
-  if (status == 0) {
+export const getEmployeeTypeText = (employeeType, status, exitDate) => {
+  if (status == 0 && exitDate ==null) {
     switch (employeeType) {
       case "CONTRACT":
         return "계약직";

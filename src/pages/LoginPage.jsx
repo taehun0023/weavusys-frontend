@@ -61,6 +61,7 @@ function LoginPage() {
             onChange={(e) => setUsername(e.target.value)}
             required
             className="input"
+            autoComplete="current-password"
           />
         </div>
         <div className="form-group">
@@ -74,6 +75,8 @@ function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
             className="input"
+            autoComplete="current-password"
+
           />
         </div>
         {error && <p className="error-message">{error}</p>}
