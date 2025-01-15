@@ -6,16 +6,17 @@ import {
     Navigate,
 } from "react-router-dom";
 import { AuthProvider, useAuth } from "./config/AuthContext";
-import LoginPage from "./pages/LoginPage";
-import Dashboard from "./pages/Dashboard";
+import LoginPage from "./mainpages/LoginPage";
+import Dashboard from "./calcul/pages/Dashboard";
 import Navbar from "./config/Navbar";
-import AccrualDetail from "./pages/AccrualDetail";
-import Admin from "./pages/Admin";
-import EmployeeDashboard from "./pages/EmployeeDashboard";
-import EmployeeRegi from "./pages/EmployeeRegi";
-import EmployeeDetail from "./pages/EmployeeDetail";
+import AccrualDetail from "./calcul/pages/AccrualDetail";
+import Admin from "./calcul/pages/Admin";
+import EmployeeDashboard from "./calcul/pages/EmployeeDashboard";
+import EmployeeRegi from "./calcul/pages/EmployeeRegi";
+import EmployeeDetail from "./calcul/pages/EmployeeDetail";
 import {useEffect} from "react";
 import { useNavigate, useLocation  } from "react-router-dom";
+import PersonnelDashboard from "./personnel/pages/PersonnelDashboard";
 const Layout = ({ children }) => (
     <>
         <Navbar />
@@ -91,6 +92,14 @@ const App = () => {
                     element={
                         <ProtectedRoute>
                             <EmployeeDetail />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/personel/dashboard"
+                    element={
+                        <ProtectedRoute>
+                            <PersonnelDashboard />
                         </ProtectedRoute>
                     }
                 />

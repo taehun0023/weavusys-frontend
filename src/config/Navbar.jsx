@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
 import { useAuth } from "./AuthContext";
-import "../config/index.css";
+import "./index.css";
 
 // 메뉴바 컴포넌트
 const Navbar = () => {
@@ -36,6 +36,9 @@ const Navbar = () => {
           <Menu $isOpen={isMenuOpen}>
             {isLoggedIn ? (
               <>
+                <MenuItem>
+                  <StyledLink to="/personel/dashboard">인사관리</StyledLink>
+                </MenuItem>
                 <MenuItem>
                   <StyledLink to="/dashboard">퇴직금리스트</StyledLink>
                 </MenuItem>
