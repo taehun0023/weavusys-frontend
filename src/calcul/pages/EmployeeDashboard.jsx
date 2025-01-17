@@ -62,7 +62,7 @@ function EmployeeDashboard() {
     <div className="container">
       <h1 className="title">WEAVUS 사원 일람 리스트</h1>
       <button className="submit-button" onClick={() => handleRowClick()}>
-        직원 등록
+        사원 등록
       </button>
       {loading && <div className="loading">Loading...</div>}
       {error && <div className="error-message">{error}</div>}

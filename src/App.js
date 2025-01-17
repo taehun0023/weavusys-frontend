@@ -17,6 +17,8 @@ import EmployeeDetail from "./calcul/pages/EmployeeDetail";
 import {useEffect} from "react";
 import { useNavigate, useLocation  } from "react-router-dom";
 import PersonnelDashboard from "./personnel/pages/PersonnelDashboard";
+import YearDashboard from "./calcul/pages/YearDashboard";
+import PersonnelDetail from "./personnel/pages/PersonnelDetail";
 const Layout = ({ children }) => (
     <>
         <Navbar />
@@ -100,6 +102,22 @@ const App = () => {
                     element={
                         <ProtectedRoute>
                             <PersonnelDashboard />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/year/dashboard"
+                    element={
+                        <ProtectedRoute>
+                            <YearDashboard />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/personel/applicant/:personelId"
+                    element={
+                        <ProtectedRoute>
+                            <PersonnelDetail />
                         </ProtectedRoute>
                     }
                 />

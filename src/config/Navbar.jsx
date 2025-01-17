@@ -40,10 +40,13 @@ const Navbar = () => {
                   <StyledLink to="/personel/dashboard">인사관리</StyledLink>
                 </MenuItem>
                 <MenuItem>
-                  <StyledLink to="/dashboard">퇴직금리스트</StyledLink>
+                  <StyledLink to="/dashboard">퇴직금 현황</StyledLink>
                 </MenuItem>
                 <MenuItem>
-                  <StyledLink to="/employee">직원리스트</StyledLink>
+                  <StyledLink to="/year/dashboard">퇴직금 검색</StyledLink>
+                </MenuItem>
+                <MenuItem>
+                  <StyledLink to="/employee">사원 등록</StyledLink>
                 </MenuItem>
                 <MenuItem>
                   <StyledLink to="/admin">관리자페이지</StyledLink>

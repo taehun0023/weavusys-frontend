@@ -137,8 +137,9 @@ select:focus {
 .action-button {
   padding: 0.4rem 0.8rem;
   background-color: #007bff;
-  margin: 20px 0;
-  width: 10rem;
+  margin: 10px 0;
+  width: 9rem;
+  /*width: 80%;*/
   color: white;
   border: none;
   border-radius: 4px;

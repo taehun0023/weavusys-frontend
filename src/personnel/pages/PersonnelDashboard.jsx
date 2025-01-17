@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { getEmployeeTypeText } from "../../utils/textUtils";
 import { useState, useEffect } from "react";
 import "../../config/index.css";
 import createAxiosInstance from "../../config/api";
@@ -20,7 +19,7 @@ function PersonnelDashboard() {
 
       try {
         const axiosInstance = createAxiosInstance(); // 인스턴스 생성
-        const response = await axiosInstance.get("/employees/lists");
+        const response = await axiosInstance.get("/personnel/applicant/list");
         if (Array.isArray(response.data)) {
           setData(response.data);
         } else {
@@ -51,12 +50,13 @@ function PersonnelDashboard() {
   }, [isFetched]);
 
   const handleRowClick = () => {
-    navigate(`/employee/new`);
+    navigate(`/applicant/applicant/new`);
   };
 
   const handleEmployeeClick = (personnelId) => {
-    navigate(`/personnel/${personnelId}`); // 상세 페이지로 이동
+    navigate(`/personnel/applicant/${personnelId}`); // 상세 페이지로 이동
   };
+//
 
   return (
     <div className="container">
@@ -71,25 +71,33 @@ function PersonnelDashboard() {
           <thead>
             <tr>
               <th className="table-header">이름</th>
-              <th className="table-header">입사일</th>
-              <th className="table-header">계약 상태</th>
+              <th className="table-header">성별</th>
+              <th className="table-header">교육기관</th>
+              <th className="table-header">지원 상태</th>
+              <th className="table-header">상태 경과일</th>
             </tr>
           </thead>
           <tbody>
-            {data.map((employee) => (
-              <tr key={employee.id}>
+            {data.map((applicant) => (
+              <tr key={applicant.id}>
                 <td className="table-data">
                   <button
                     className="action-button"
-                    onClick={() => handleEmployeeClick(employee.id)} // 클릭 시 handleEmployeeClick 함수 호출
+                    onClick={() => handleEmployeeClick(applicant.id)} // 클릭 시 handleEmployeeClick 함수 호출
                   >
-                    {employee.name}
+                    {applicant.name}
                   </button>
                 </td>
-                <td className="table-data">{employee.entryDate}</td>
                 <td className="table-data">
-                  {getEmployeeTypeText(employee.employeeType, employee.status)}
+                  {applicant.gender}
                 </td>
+                <td className="table-data">
+                  {applicant.institution.name}
+                </td>
+                <td className="table-data">
+                  {applicant.admissionStatus}
+                </td>
+                <td className="table-data">{applicant.admissionStatus}</td>
               </tr>
             ))}
           </tbody>

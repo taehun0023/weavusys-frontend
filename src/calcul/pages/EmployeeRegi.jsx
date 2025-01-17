@@ -40,7 +40,7 @@ const EmployeeRegi = () => {
 
   return (
     <div className="detail-container">
-      <h2 className="title">직원 등록 페이지</h2>
+      <h2 className="title">사원 등록 페이지</h2>
       {responseMessage && !error && (
         <p className="success-message">{responseMessage}</p>
       )}
