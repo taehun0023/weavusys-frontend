@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getStateText,
@@ -8,7 +8,6 @@ import {
 import "../../config/index.css";
 
 import { useFetchAccual } from "../utils/useFetchAccual"; // 유저 정보 요청 훅
-import { useFetchYearData } from "../utils/useFetchYearData"; // 연도별 데이터 요청 훅
 
 function Dashboard() {
   const navigate = useNavigate();

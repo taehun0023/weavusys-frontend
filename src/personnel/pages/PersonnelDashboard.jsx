@@ -53,8 +53,8 @@ function PersonnelDashboard() {
     navigate(`/applicant/applicant/new`);
   };
 
-  const handleEmployeeClick = (personnelId) => {
-    navigate(`/personnel/applicant/${personnelId}`); // 상세 페이지로 이동
+  const handleEmployeeClick = (Id) => {
+    navigate(`/personnel/applicant/${Id}`); // 상세 페이지로 이동
   };
 //
 
@@ -97,7 +97,9 @@ function PersonnelDashboard() {
                 <td className="table-data">
                   {applicant.admissionStatus}
                 </td>
-                <td className="table-data">{applicant.admissionStatus}</td>
+                <td className="table-data">
+                  D +{applicant.statusDate}일
+                </td>
               </tr>
             ))}
           </tbody>

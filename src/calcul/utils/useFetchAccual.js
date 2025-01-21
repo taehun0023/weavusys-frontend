@@ -13,7 +13,12 @@ export function useFetchAccual() {
       try {
         const axiosInstance = createAxiosInstance();
         const response = await axiosInstance.get("/employees/accrual");
-        setUserData(response.data);
+        const sortedData = response.data.sort((a, b) => {
+          const dateA = new Date(a.employee.entryDate); // entryDate를 Date 객체로 변환
+          const dateB = new Date(b.employee.entryDate);
+          return dateA - dateB; // 오름차순 정렬 (날짜가 오래된 순)
+        });
+        setUserData(sortedData);
       } catch (error) {
         if (error.response) {
           console.error(

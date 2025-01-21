@@ -37,7 +37,7 @@ const Navbar = () => {
             {isLoggedIn ? (
               <>
                 <MenuItem>
-                  <StyledLink to="/personel/dashboard">인사관리</StyledLink>
+                  <StyledLink to="/personnel/dashboard">인사관리</StyledLink>
                 </MenuItem>
                 <MenuItem>
                   <StyledLink to="/dashboard">퇴직금 현황</StyledLink>

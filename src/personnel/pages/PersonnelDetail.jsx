@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getEmployeeTypeText, getRankText } from "../../utils/textUtils";
 import createAxiosInstance from "../../config/api";
 import "../../config/index.css";
+import {InstitutionListApi} from "../utils/InstitutionListApi";
 
 function PersonnelDetail() {
-  const { personnelId } = useParams();
+  const { Id } = useParams();
   const navigate = useNavigate();
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [editedItem, setEditedItem] = useState({});
+  const { loadList, institutionList, instloading, insterror } = InstitutionListApi();
 
   useEffect(() => {
     const fetchPersonnel = async () => {
       try {
         const axiosInstance = createAxiosInstance(); // 인스턴스 생성
-        const response = await axiosInstance.get(`/personnel/applicant/${personnelId}`);
+        const response = await axiosInstance.get(`/personnel/applicant/${Id}`);
         setItem(response.data);
         setEditedItem(response.data);
       } catch (err) {
@@ -29,7 +30,11 @@ function PersonnelDetail() {
     };
 
     fetchPersonnel();
-  }, [personnelId]);
+  }, [Id]);
+
+  useEffect(() => {
+    loadList();
+  }, [loadList]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,19 +44,16 @@ function PersonnelDetail() {
     }));
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    e.preventDefault(); // 폼 제출 방지
     const confirmSave = window.confirm("해당 지원자를 수정하시겠습니까?");
     if (!confirmSave) {
       return;
     } else {
       try {
-        if (editedItem.rank === "" && editedItem.employeeType === "") {
-          alert("입력되지 않은 값이 있습니다. 다시 한번 확인해 주세요."); // 직급이 선택되지 않으면 경고 메시지 표시
-          return;
-        }
         const axiosInstance = createAxiosInstance(); // 인스턴스 생성
         const response = await axiosInstance.put(
-          `/personnel/applicant/${personnelId}`,
+          `/personnel/applicant/${Id}`,
           editedItem
         );
         setItem(response.data);
@@ -77,7 +79,7 @@ function PersonnelDetail() {
     navigate(-1);
   };
 
-  //지원자 삭제 시 퇴직일 여부 판단하여 삭제 진행
+  // 지원자 삭제 시 퇴직일 여부 판단하여 삭제 진행
   const handleDelete = async (id) => {
       const confirmDelete = window.confirm("직원을 삭제하시겠습니까?");
       if (!confirmDelete) return;
@@ -88,7 +90,7 @@ function PersonnelDetail() {
       );
       if (response.status === 200) {
         alert("지원자가 성공적으로 삭제되었습니다.");
-        navigate("/employee"); // 삭제 후 직원 목록 페이지로 이동
+        navigate("/personnel/dashboard"); // 삭제 후 지원자 목록 페이지로 이동
       } else if (response.status === 404) {
         alert("해당 지원자는 존재하지 않습니다.");
       }
@@ -110,7 +112,7 @@ function PersonnelDetail() {
           </div>
           <div style={styles.cardBody}>
             {isEditing ? (
-              <>
+              <div>
                 <div>
                   <input
                     style={styles.input}
@@ -133,19 +135,26 @@ function PersonnelDetail() {
                 </div>
                 <div style={styles.formGroup}>
                   <label style={styles.label}>성별</label>
-                  <input
-                    style={styles.input}
-                    name="gender"
-                    value={editedItem.gender}
-                    onChange={handleChange}
-                    required
-                  />
+                  <select
+                      style={styles.input}
+                      name="gender"
+                      value={editedItem.gender}
+                      onChange={handleChange}
+                      className="input"
+                      required
+                  >
+                    <option value="" disabled>
+                      성별을 선택해 주세요
+                    </option>
+                    <option value="남성">남성</option>
+                    <option value="여성">여성</option>
+                  </select>
                 </div>
                 <div style={styles.formGroup}>
                   <label style={styles.label}>email</label>
                   <input
-                    type="email"
                     style={styles.input}
+                    type="email"
                     name="email"
                     value={editedItem.email}
                     onChange={handleChange}
@@ -164,7 +173,6 @@ function PersonnelDetail() {
                     required
                   />
                 </div>
-                {editedItem.employeeType === "REGULAR" && (
                     <div style={styles.formGroup}>
                       <label style={styles.label}>전화번호</label>
                       <input
@@ -173,84 +181,99 @@ function PersonnelDetail() {
                           name="phoneNumber"
                           value={editedItem.phoneNumber}
                           onChange={handleChange}
-                          required
                           className="input"
                       />
                     </div>
-                )}
+                <div style={styles.formGroup}>
+                  <label style={styles.label}>소속 기관</label>
+                  <select
+                      style={styles.input}
+                      name="institutionId"
+                      value={editedItem.institutionId || ""}
+                      onChange={handleChange}
+                      className="input"
+                      required
+                  >
+                    <option value="" disabled>
+                      소속 기관을 선택해 주세요
+                    </option>
+                    {institutionList && institutionList.length > 0 ? (
+                        institutionList.map((institution) => (
+                            <option key={institution.id} value={institution.id}>
+                              {institution.name}
+                            </option>
+                        ))
+                    ) : (
+                        <option value="" disabled>
+                          Loading...
+                        </option>
+                    )}
+                  </select>
+                </div>
                 <div style={styles.formGroup}>
                   <label style={styles.label}>지원 날짜</label>
-                  <select
+                  <input
                       type="date"
                       style={styles.input}
                     name="joiningDate"
                     value={editedItem.joiningDate || ""}
                     onChange={handleChange}
                     required
-                  >
-                    <option value={0}>사원</option>
-                    <option value={1}>주임</option>
-                    <option value={2}>계장</option>
-                    <option value={3}>부장</option>
-                    <option value={4}>사장</option>
-                  </select>
+                  />
                 </div>
-              </>
+              </div>
             ) : (
               <>
                 <div style={styles.formGroup}>
-                  <label style={styles.label}>직원 아이디</label>
-                  <div style={styles.box}>
-                    <p>{item.id}</p>
-                  </div>
-                </div>
-                <div style={styles.formGroup}>
-                  <label style={styles.label}>직원 이름</label>
+                  <label style={styles.label}>지원자 이름</label>
                   <div style={styles.box}>
                     <p>{item.name}</p>
                   </div>
                 </div>
                 <div style={styles.formGroup}>
-                  <label style={styles.label}>입사일</label>
+                    <label style={styles.label}>성별</label>
+                    <div style={styles.box}>
+                      <p>{item.gender}</p>
+                    </div>
+                </div>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>email</label>
+                    <div style={styles.box}>
+                        <p>{item.email}</p>
+                    </div>
+                </div>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>생년월일</label>
+                    <div style={styles.box}>
+                        <p>{item.birthDate}</p>
+                    </div>
+                </div>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>전화번호</label>
+                    <div style={styles.box}>
+                        <p>{item.phoneNumber}</p>
+                    </div>
+                </div>
+                <div style={styles.formGroup}>
+                  <label style={styles.label}>소속 기관</label>
                   <div style={styles.box}>
-                    <p>{item.entryDate}</p>
+                    <p>{item.institution.name}</p>
                   </div>
                 </div>
                 <div style={styles.formGroup}>
-                  <label style={styles.label}>퇴사일</label>
-                  <div style={styles.box}>
-                    <p>{item.exitDate ? item.exitDate : "재직중"}</p>
-                  </div>
-                </div>
-                <div style={styles.formGroup}>
-                  <label style={styles.label}>계약 상태</label>
-                  <div style={styles.box}>
-                    <p>
-                      {" "}
-                      {getEmployeeTypeText(item.employeeType, item.status)}
-                    </p>
-                  </div>
-                </div>
-                <div style={styles.formGroup}>
-                  <label style={styles.label}>전환 날짜</label>
-                  <div style={styles.box}>
-                    <p>{item.conversionDate ? item.conversionDate : "없음"}</p>
-                  </div>
-                </div>
-                <div style={styles.formGroup}>
-                  <label style={styles.label}>직급</label>
-                  <div style={styles.box}>
-                    <p>{getRankText(item.rank)}</p>
-                  </div>
+                    <label style={styles.label}>지원 날짜</label>
+                    <div style={styles.box}>
+                        <p>{item.joiningDate}</p>
+                    </div>
                 </div>
               </>
             )}
           </div>
           <div style={styles.cardFooter}>
             {isEditing ? (
-              <button style={styles.actionButton} onClick={handleSave}>
-                저장
-              </button>
+                <button style={styles.actionButton} onClick={handleSave}>
+                  저장
+                </button>
             ) : (
               <button style={styles.actionButton} onClick={handleEditClick}>
                 수정
@@ -271,6 +294,7 @@ function PersonnelDetail() {
         </div>
       )}
     </div>
+
   );
 }
 
@@ -331,6 +355,17 @@ const styles = {
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
+  },
+  actionButton2: {
+    padding: "8px 12px",
+    margin: "0 5px",
+    backgroundColor: "rgb(76, 175, 80)",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    display: "block",
+    marginLeft: "auto"
   },
   actionButtonDanger: {
     backgroundColor: "rgb(76, 175, 80)",

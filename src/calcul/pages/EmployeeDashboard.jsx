@@ -21,8 +21,13 @@ function EmployeeDashboard() {
       try {
         const axiosInstance = createAxiosInstance(); // 인스턴스 생성
         const response = await axiosInstance.get("/employees/lists");
-        if (Array.isArray(response.data)) {
-          setData(response.data);
+        const sortedData = response.data.sort((a, b) => {
+          const dateA = new Date(a.entryDate); // entryDate를 Date 객체로 변환
+          const dateB = new Date(b.entryDate);
+          return dateA - dateB; // 오름차순 정렬 (날짜가 오래된 순)
+        });
+        if (Array.isArray(sortedData)) {
+          setData(sortedData);
         } else {
           setError("서버에서 받은 데이터 형식이 올바르지 않습니다.");
         }

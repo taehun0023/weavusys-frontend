@@ -19,6 +19,7 @@ import { useNavigate, useLocation  } from "react-router-dom";
 import PersonnelDashboard from "./personnel/pages/PersonnelDashboard";
 import YearDashboard from "./calcul/pages/YearDashboard";
 import PersonnelDetail from "./personnel/pages/PersonnelDetail";
+import PersonnelRegi from "./personnel/pages/PersonnelRegi";
 const Layout = ({ children }) => (
     <>
         <Navbar />
@@ -98,7 +99,7 @@ const App = () => {
                     }
                 />
                 <Route
-                    path="/personel/dashboard"
+                    path="/personnel/dashboard"
                     element={
                         <ProtectedRoute>
                             <PersonnelDashboard />
@@ -114,10 +115,18 @@ const App = () => {
                     }
                 />
                 <Route
-                    path="/personel/applicant/:personelId"
+                    path="/personnel/applicant/:Id"
                     element={
                         <ProtectedRoute>
                             <PersonnelDetail />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/applicant/applicant/new"
+                    element={
+                        <ProtectedRoute>
+                            <PersonnelRegi />
                         </ProtectedRoute>
                     }
                 />
